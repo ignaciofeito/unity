@@ -6,7 +6,6 @@ public class Player : MonoBehaviour
 {
     public int health = 3;
     public int speed = 5;
-    public Vector3 direction = new Vector3(0f, 0f, 1f);
 
     void Start()
     {
@@ -15,7 +14,22 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        transform.position += direction * speed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.position += Vector3.forward * speed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.position += Vector3.back * speed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.position += Vector3.left * speed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.position += Vector3.right * speed * Time.deltaTime;
+        }
     }
 
     void Damage(int attack)
