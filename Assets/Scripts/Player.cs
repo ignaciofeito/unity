@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     public int health = 3;
     public int speed = 5;
 
+    private float cameraAxisX = 0f;
+
     void Start()
     {
 
@@ -14,6 +16,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        RotatePlayer();
         if (Input.GetKey(KeyCode.W))
         {
             transform.position += Vector3.forward * speed * Time.deltaTime;
@@ -32,6 +35,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void RotatePlayer()
+    {
+        cameraAxisX += Input.GetAxis("Mouse X");
+        Quaternion newRotation = Quaternion.Euler(0, cameraAxisX, 0);
+        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, 2.5f * Time.deltaTime);
+    }
     void Damage(int attack)
     {
         health -= attack;
